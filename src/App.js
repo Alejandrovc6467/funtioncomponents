@@ -6,6 +6,7 @@ import './App.css';
 //mis import
 import ClassComponent from './components/ClassComponent';
 import FuncComponent from './components/FuncComponent';
+
 import FormSignUp from './components/FormSignUp';
 import  Container  from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -21,7 +22,7 @@ import Typography from '@mui/material/Typography';
 
 function App() {
   return (
-    <Container  component="section" maxWidth="sm">{/*este Container de mui recibe un tipo de componente para igualarlo  y tambien maxwidth entre otros */}
+    <Container  component="section" maxWidth="sm" >{/*este Container de mui recibe un tipo de componente para igualarlo  y tambien maxwidth entre otros */}
      
       <Typography variant='h3'  align='center' component="h1" >Formulario Registro</Typography>{/** Para los h1 y demas se utiliza el componente typography de mui, para usarlo hay que importarlo aqui en este codigo con el import y ademas hay poner l link del cdn en el index del proyecto */}
       <FormSignUp/>

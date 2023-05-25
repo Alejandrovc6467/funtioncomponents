@@ -26,22 +26,43 @@ function FormSignUp() {
     const [novedades, setNovedades] = useState(true)
 
 
+
+   //useState para controlar las condiciones de lo que quiero en mis textfield 
+   const [errorName, setErrorName] = useState(false)
+   // funcion que va a estar siendo llamada cada vez que le quite el foco al textfield name
+   //esto gracias al atrubuto que le agregue al textfield (onBlur) el cual se encarga de llamar a esta funcion
+   const handleChangeName = (e) => {
+        setErrorName(e.target.value.length < 3 ? true : false);
+   }
+
+
     const manejarEnvio = (e) => {
         //el e.preventDefault es el encargado de NO recargar la pagina y solo llamar a esta funcion y realizar lo que este escrito aquí, claro el formulario llama a la funcion onSubmit y le pasa por parametro esta funcion
         e.preventDefault()
-        console.log({name, lastName, email, promociones, novedades})
+        
+      //antes de enviar los datos, primero verifico que todo este correcto, por ejemplo que el nombre sea mayor que 3 caracteres
+        if(!errorName){
+            setName("")
+            setLastName("")
+            setEmail("")
+            //envio los datos este consoloe.log es una simulacion del envio
+            console.log({name, lastName, email, promociones, novedades})
+        }else{
+            console.log("Complete todo de forma correcta")
+        }
+       
     } 
 
     
     return ( 
 
-        <form onSubmit={manejarEnvio}>
+        <form onSubmit={manejarEnvio} >
           
-            <TextField id='name' label="Nombre" variant='outlined'  fullWidth margin='normal' value={name} onChange={(e) => { setName(e.target.value) }}/>
+            <TextField id='name' label="Nombre" variant='outlined' required  fullWidth margin='normal' value={name}  onChange={(e) => { setName(e.target.value) }} error={errorName} helperText={errorName ? 'Mínimo 3 caracteres requeridos' : ''} onBlur={handleChangeName}  />
 
-            <TextField id='lastName' label="Apellidos" variant='outlined' fullWidth margin='normal'  value={lastName} onChange={(e) => { setLastName(e.target.value) }}/>
+            <TextField id='lastName' label="Apellidos" variant='outlined' fullWidth margin='normal'  value={lastName} onChange={(e) => { setLastName(e.target.value) }}  />
 
-            <TextField id='email' label="Email" variant='outlined' fullWidth margin='normal' value={email} onChange={(e) => { setEmail(e.target.value) }} />
+            <TextField id='email' label="Email" variant='outlined' fullWidth margin='normal' value={email} onChange={(e) => { setEmail(e.target.value) }}  helperText="Puede ser solo un texto informativo sin una validacion"  />
 
             <FormGroup>
                 <FormControlLabel control={<Switch defaultChecked />} label="Promociones"  value={promociones} onChange={(e) => { setPromociones(!promociones) }} />
